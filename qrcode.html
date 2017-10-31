@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.lug.ustc.edu.cn/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.lug.ustc.edu.cn/css?family=Roboto" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+  <title>Awesome-qr.js</title>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73442912-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-73442912-3');
+  </script>
+
+
+  <style>
+    * {
+      font-family: "Roboto", "Source Sans Pro", Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .brand {
+      font-size: 22px;
+    }
+
+    .nav-wrapper {
+      text-align: left;
+      padding-top: 5px;
+    }
+
+    .btn,
+    .btn-floating {
+      background-color: #0B486B;
+    }
+
+    .btn:focus,
+    .btn-large:focus,
+    .btn-floating:focus {
+      background-color: #0B486B !important;
+    }
+
+    .btn:hover,
+    .btn-floating:hover {
+      background-color: #0B486B !important;
+    }
+
+    input:not([type]):focus:not([readonly]),
+    input[type=text]:not(.browser-default):focus:not([readonly]),
+    input[type=password]:not(.browser-default):focus:not([readonly]),
+    input[type=email]:not(.browser-default):focus:not([readonly]),
+    input[type=url]:not(.browser-default):focus:not([readonly]),
+    input[type=time]:not(.browser-default):focus:not([readonly]),
+    input[type=date]:not(.browser-default):focus:not([readonly]),
+    input[type=datetime]:not(.browser-default):focus:not([readonly]),
+    input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+    input[type=tel]:not(.browser-default):focus:not([readonly]),
+    input[type=number]:not(.browser-default):focus:not([readonly]),
+    input[type=search]:not(.browser-default):focus:not([readonly]),
+    textarea.materialize-textarea:focus:not([readonly]) {
+      border-bottom: 1px solid #3B8686;
+      -webkit-box-shadow: 0 1px 0 0 #3B8686;
+      box-shadow: 0 1px 0 0 #3B8686;
+    }
+
+    [type="checkbox"].filled-in:checked+label:after {
+      background-color: #3B8686;
+      border: 2px solid #3B8686;
+    }
+
+    #stage {
+      padding-top: 98px;
+    }
+
+    @media only screen and (max-width: 992px) {
+      .nav-wrapper {
+        text-align: left;
+      }
+
+      #stage {
+        padding-top: 78px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav class="nav-extended">
+      <div class="container">
+        <div class="nav-wrapper" align="center">
+          <a href="#" class="brand">Gerar Qrcode</a>
+        </div>
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent" id="tabs">
+            <li class="tab">
+              <a class="active" href="#home">Intro</a>
+            </li>
+            <li class="tab">
+              <a href="#customize">Customize</a>
+            </li>
+            <li class="tab">
+              <a href="#generate">Generate</a>
+            </li>
+            <li class="tab">
+              <a href="#more">More</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="container" id="stage" style="display: none;">
+
+    <div id="more">
+      <div class="row">
+        <div class="col s12 l6">
+          <div class="card">
+            <div class="card-content">
+              <h5>Sobre o Gerador</h5>
+
+            </div>
+          </div>
+        </div>
+        <div class="col s12 l6">
+          <div class="card">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="customize">
+      <div class="row">
+        <div class="col s12 l6">
+          <div class="card">
+            <div class="card-content">
+              <h5>Basic values</h5>
+              <div class="input-field">
+                <textarea id="contents" class="materialize-textarea">Makito loves Kafuu Chino.</textarea>
+                <label for="contents">Contents</label>
+              </div>
+              <div class="input-field">
+                <label for="in-size">Size (px)</label>
+                <input type="number" id="in-size" value="800" />
+              </div>
+              <div class="input-field">
+                <label for="in-margin">Margin (px)</label>
+                <input type="number" id="in-margin" value="20" />
+              </div>
+
+              <div class="input-field">
+                <label for="in-dotScale">Dot scale</label>
+                <input type="number" id="in-dotScale" value="0.35" />
+              </div>
+
+              <div id="c-ctr" style="display: none;">
+                <div class="input-field">
+                  <label for="in-cd">Color Dark</label>
+                  <input type="text" id="in-cd" value="#000000" />
+                </div>
+                <div class="input-field">
+                  <label for="in-cl">Color Light</label>
+                  <input type="text" id="in-cl" value="#FFFFFF" />
+                </div>
+              </div>
+
+              <div id="b-ctr" style="display: none; margin-top: 20px;margin-bottom:0;">
+                <div class="input-field">
+                  <label for="in-bin-threshold">Binarize threshold (0&lt;threshold&lt;255)</label>
+                  <input type="number" id="in-bin-threshold" value="128" />
+                </div>
+              </div>
+
+              <div id="backgroundImgLoaded" style="display:none; margin-top: 25px;">
+                <div class="input-field">
+                  <label for="in-backgroundDimming">Background dimming</label>
+                  <input type="text" id="in-backgroundDimming" value="rgba(0, 0, 0, 0.1)" />
+                </div>
+              </div>
+
+              <div id="logoImgLoaded" style="display:none; margin-top: 25px;">
+                <div class="input-field">
+                  <label for="in-logo-scale">Logo scale (0&lt;logoScale&lt;1.0)</label>
+                  <input type="number" id="in-logo-scale" value="0.2" />
+                </div>
+                <div class="input-field">
+                  <label for="in-logo-margin">Logo margin (px)</label>
+                  <input type="number" id="in-logo-margin" value="6" />
+                </div>
+                <div class="input-field">
+                  <label for="in-logo-radius">Logo corner radius (px)</label>
+                  <input type="number" id="in-logo-radius" value="8" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 l6">
+          <div class="card">
+            <div class="card-content">
+              <h5>Extra options</h5>
+              <p style="margin-top: 10px">
+                <input type="checkbox" class="filled-in" id="whiteMargin" />
+                <label for="whiteMargin">Margem Branca</label>
+              </p>
+              <p style="margin-top: 10px">
+                <input type="checkbox" class="filled-in" id="maskedDots" />
+                <label for="maskedDots">Pontos mascarados(experimental)</label>
+              </p>
+              <p style="margin-top: 10px">
+                <input type="checkbox" class="filled-in" id="auto-color" checked/>
+                <label for="auto-color">Auto color (substituir a cor escura e clara)</label>
+              </p>
+              <p style="margin-top: 10px">
+                <input type="checkbox" class="filled-in" id="binarize" />
+                <label for="binarize">Binarize (substituir a cor escura e clara)</label>
+              </p>
+
+              <div id="file-api-issue" style="display: none;margin-top: 10px">
+                <p class="orange-text">
+                  <i>File APIs are not fully supported in this browser.</i>
+                </p>
+              </div>
+
+              <div id="file-form">
+                <p style="margin-top: 10px">
+                  <button id="background-img-select" class="waves-effect waves-light btn">Selecione Imagem de background
+                  </button>
+                </p>
+                <p style="margin-top: 10px">
+                  <button id="logo-img-select" class="waves-effect waves-light btn">Selecione Imagem de Logo
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="position:fixed; right: 0;bottom: 0;padding: 20px; z-index: 9999;">
+          <a class="btn-floating btn-large waves-effect waves-light" onclick="j_generate()">
+            <i class="material-icons">check</i>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div id="home">
+      <div class="row" style="padding-top: 0;">
+        <div class="col s12 l4 push-l8">
+
+        </div>
+        <div class="col s12 l4 pull-l2">
+          <div class="card">
+            <div class="card-image">
+              <img class="responsive-img" src="assets/sigmaker.jpg">
+              <a class="btn-floating halfway-fab waves-effect waves-light">
+                <i class="material-icons" onclick="j_customize()">lightbulb_outline</i>
+              </a>
+            </div>
+
+            <div class="card-content">
+              <p align="center">
+                <i>Impressionante gerador de qrcode!</i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="generate">
+      <div class="row" style="padding-top: 0;">
+        <div class="col s12 l4 push-l8">
+        </div>
+        <div class="col s12 l4 pull-l3">
+          <div class="card">
+            <div class="card-image">
+              <img id="qrcode" style="margin-top: 0;" class="responsive-img" src="assets/sigmaker.jpg">
+              <a class="btn-floating halfway-fab waves-effect waves-light">
+                <i class="material-icons" onclick="j_customize()">refresh</i>
+              </a>
+            </div>
+            <div class="card-content">
+              <p align="center">Tente verificar com o seu smartphone!</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <p style="font-size:14px;opacity:0.6;"> &copy; 2017
+      <a href="https://github.com/jlameira" target="_blank" style="color: #000; text-decoration: underline">Jonathan</a>
+    </p>
+    <br>
+  </div>
+  <div style='height: 0px;width:0px; overflow:hidden;'>
+    <input type="file" id="background-img-select-native" accept="image/*">
+    <input type="file" id="logo-img-select-native" accept="image/*">
+  </div>
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+  <script type="text/javascript">
+    if ('addEventListener' in window) {
+      window.addEventListener('load', function () {
+        document.body.className = document.body.className.replace(/\bis-loading\b/, '');
+      });
+      document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+    }
+  </script>
+  <script type="text/javascript" src="require.js">
+  </script>
+  <script type="text/javascript">
+    var backgroundImg;
+    var logoImg;
+
+    function handleFileSelectBKG(evt) {
+      var files = evt.target.files; // FileList object
+      // files is a FileList of File objects. List some properties.
+      var output = [];
+      if (files.length <= 0) return;
+      var file = files[0];
+      if (!file.type.toString().startsWith("image/")) {
+        $("#and-save").hide();
+        $("#image-result").hide();
+        alert('Oops, the file type is not correct.');
+        return;
+      }
+      //console.log(file);
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      backgroundImg = undefined;
+      img.onload = function () {
+        $('#backgroundImgLoaded').show();
+        backgroundImg = img;
+        $("#background-img-select").text("Remove background image");
+      };
+      img.src = url;
+    }
+
+    function handleFileSelectLOGO(evt) {
+      var files = evt.target.files; // FileList object
+      // files is a FileList of File objects. List some properties.
+      var output = [];
+      if (files.length <= 0) return;
+      var file = files[0];
+      if (!file.type.toString().startsWith("image/")) {
+        $("#and-save").hide();
+        $("#image-result").hide();
+        alert('Oops, the file type is not correct.');
+        return;
+      }
+      //console.log(file);
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      logoImg = undefined;
+      img.onload = function () {
+        $('#logoImgLoaded').show();
+        logoImg = img;
+        $("#logo-img-select").text("Remove logo image");
+      };
+      img.src = url;
+    }
+
+    $("#auto-color").change(function () {
+      if (this.checked) {
+        $('#c-ctr').hide();
+      } else {
+        $('#c-ctr').show();
+      }
+    });
+
+    $("#binarize").change(function () {
+      if (!this.checked) {
+        $('#b-ctr').hide();
+      } else {
+        $('#b-ctr').show();
+      }
+    });
+
+    function j_more() {
+      $('ul.tabs').tabs('select_tab', 'more');
+    }
+
+    function j_customize() {
+      $('ul.tabs').tabs('select_tab', 'customize');
+    }
+
+    function j_generate() {
+      try {
+        var options = {
+          text: $('#contents').val(),
+          size: $('#in-size').val(),
+          margin: $('#in-margin').val(),
+          dotScale: parseFloat($('#in-dotScale').val()),
+          maskedDots: $('#maskedDots').is(":checked"),
+          colorDark: $('#in-cd').val(),
+          colorLight: $('#in-cl').val(),
+          correctLevel: AwesomeQRCode.CorrectLevel.H,
+          backgroundImage: backgroundImg,
+          backgroundDimming: $('#in-backgroundDimming').val(),
+          logoImage: logoImg,
+          logoScale: parseFloat($('#in-logo-scale').val()),
+          logoMargin: $('#in-logo-margin').val(),
+          logoCornerRadius: $('#in-logo-radius').val(),
+          autoColor: $('#auto-color').is(":checked"),
+          whiteMargin: $('#whiteMargin').is(":checked"),
+          binarize: $('#binarize').is(":checked"),
+          binarizeThreshold: $('#in-bin-threshold').val(),
+          bindElement: 'qrcode'
+        };
+        awesomeQR.create(options);
+        $('#qrcode').show();
+        $('ul.tabs').tabs('select_tab', 'generate');
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    $(function () {
+      $('#stage').show();
+      $('ul.tabs').tabs();
+      document.getElementById('background-img-select-native').addEventListener('change', handleFileSelectBKG, false);
+      document.getElementById('logo-img-select-native').addEventListener('change', handleFileSelectLOGO, false);
+      $("#background-img-select").click(function () {
+        if (backgroundImg === undefined) {
+          $("#background-img-select-native").click();
+        } else {
+          $('#backgroundImgLoaded').hide();
+          backgroundImg = undefined;
+          $("#background-img-select").text("Selecione Imagem de Background");
+        }
+      });
+      $("#logo-img-select").click(function () {
+        if (logoImg === undefined) {
+          $("#logo-img-select-native").click();
+        } else {
+          $('#logoImgLoaded').hide();
+          logoImg = undefined;
+          $("#logo-img-select").text("Selecione Imagem da Logo");
+        }
+      });
+
+      if (window.File && window.FileReader && window.FileList && window.Blob) {
+        $("#file-api-issue").hide();
+        $("#file-form").show();
+      } else {
+        $("#file-api-issue").show();
+        $("#file-form").hide();
+      }
+    });
+
+    var awesomeQR;
+    require(['awesome-qr'], function (instance) {
+      awesomeQR = instance;
+    });
+  </script>
+</body>
+
+</html>
