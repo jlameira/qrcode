@@ -2,6 +2,7 @@
  * @fileoverview
  * Awesome-qr.js
  *
+ * 
  * @author Makito <sumimakito@hotmail.com>
  * @see <a href="https://www.keep.moe/" target="_blank">https://www.keep.moe/</a>
  * @see <a href="https://github.com/SumiMakito/Awesome-qr.js" target="_blank">https://github.com/SumiMakito/Awesome-qr.js</a>
