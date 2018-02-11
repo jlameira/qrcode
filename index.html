@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-73442912-3"></script>]
   <script>
@@ -172,14 +172,20 @@
                 <input type="number" id="in-dotScale" value="0.35" />
               </div>
 
-              <div id="c-ctr" style="display: none;">
+              <div id="c-ctr">
                 <div class="input-field">
-                  <label for="in-cd">Color Dark</label>
-                  <input type="text" id="in-cd" value="#000000" />
+                  <i class="material-icons dp48">
+                  </i>
+                  <span>
+                    <input type="color" id="in-cd" value="#000000" /> Cor do Frame
+
+                  </span>
                 </div>
                 <div class="input-field">
-                  <label for="in-cl">Color Light</label>
-                  <input type="text" id="in-cl" value="#FFFFFF" />
+                  <i class="material-icons dp48"></i>
+                  <span>
+                    <input type="color" id="in-cl" value="#FFFFFF" /> Cor light
+                  </span>
                 </div>
               </div>
 
@@ -227,7 +233,7 @@
                 <label for="maskedDots">Pontos mascarados(experimental)</label>
               </p>
               <p style="margin-top: 10px">
-                <input type="checkbox" class="filled-in" id="auto-color" checked/>
+                <input type="checkbox" class="filled-in" id="auto-color" />
                 <label for="auto-color">Auto color (substituir a cor escura e clara)</label>
               </p>
               <p style="margin-top: 10px">
@@ -321,7 +327,7 @@
     <br>
   </div>
   <div style='height: 0px;width:0px; overflow:hidden;'>
-    
+
     <input type="file" id="background-img-select-native" accept="image/*">
 
     <input type="file" id="logo-img-select-native" accept="image/*">
@@ -331,7 +337,7 @@
   <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
   <script type="text/javascript" src="download.js"></script>
   <script type="text/javascript" src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-  
+
 
   <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="assets/js/respond.min.js"></script>
